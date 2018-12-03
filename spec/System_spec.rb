@@ -24,7 +24,6 @@ describe 'System' do
     }
 
     it "has an Fx class" do
-      p @sys_one.fx
       expect(@sys_one.fx).to be_instance_of(Fx)
     end
   end
