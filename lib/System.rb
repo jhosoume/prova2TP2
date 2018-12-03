@@ -36,9 +36,15 @@ class System
   end
 
   def first_y
+    b2_inverted = b2 ** -1
+    yn[1] = yn[0] + h * a * (yn[0] - xn[0]) *
+                  b2_inverted + zn[0] * b2_inverted  
   end
 
   def first_z
+    g_inverted = g ** -1
+    zn[1] = zn[0] + h * 
+      (yn[0] - rl * zn[0]) * g_inverted 
   end
 
   def calc_x(indx)
@@ -53,7 +59,6 @@ class System
     prev_indx = indx - 2
     yn[indx] = yn[prev_indx] + h * a * (yn[prev_indx] - xn[prev_indx]) *
                   b2_inverted + zn[prev_indx] * b2_inverted  
-
   end
 
   def calc_z(indx)
