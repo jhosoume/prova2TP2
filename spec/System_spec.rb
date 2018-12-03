@@ -1,52 +1,31 @@
 require './lib/System'
 require './lib/Fx'
 
-describe 'Fx' do
-  it "has m0, m1 and bp" do
-    expect{ Fx.new }.to raise_error(ArgumentError)
-  end
-
-  context "when valid" do
-    before {
-      @fx =  Fx.new(-0.7879, # m0
-                   -1.4357, # m1
-                   1)       # Bp
-    }
-
-    it "has a m0 number" do
-      expect(@fx.m0).to be(-0.7879)
-    end
-
-    it "has a m1 number" do
-      expect(@fx.m1).to be(-1.4357)
-    end
-
-    it "has a bp number" do
-      expect(@fx.bp).to be(1)
-    end
-
-    it "has a m number" do
-      expect(@fx.m).to be_within(0.001).of(-0.6478)
-    end
-
-    it "is calculate when receives a xn value" do
-      result = @fx.calculate(0)
-      expect(result).to be_within(0.001).of(0)
-
-      result = @fx.calculate(0.02)
-      expect(result).to be_within(0.001).of(-0.028714)
-
-      result = @fx.calculate(-1)
-      expect(result).to be_within(0.001).of(1.4357)
-    end
-  end
-end
-
 describe 'System' do
   it "is only created with constants" do
     expect{ System.new }.to raise_error(ArgumentError)
   end
 
   context "when valid (defined constant values)" do
+    before {
+      @sys_one = System.new(10000,          # n
+                            0.9259,         # a
+                            0.15,           # b1
+                            1.5,            # b2
+                            0.1,            # g
+                            0.002,          # rl
+                            Fx.new(-0.7879, # m0
+                                   -1.4357, # m1
+                                   1),      # Bp
+                            0.02,           # h
+                            0.1,            # x0
+                            0.1,            # y0
+                            0.1)            # z0
+    }
+
+    it "has an Fx class" do
+      p @sys_one.fx
+      expect(@sys_one.fx).to be_instance_of(Fx)
+    end
   end
 end

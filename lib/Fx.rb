@@ -1,11 +1,10 @@
 class Fx
-  attr_accessor :m0, :m1, :bp
-  attr_reader :m
+  attr_reader :m0, :m1, :bp, :m
   def initialize(m0, m1, bp)
-    self.m0 = m0
-    self.m1 = m1
+    @m0 = m0
+    @m1 = m1
     @m ||= m1 - m0
-    self.bp = bp
+    @bp = bp
   end
 
   def calculate(x_value)

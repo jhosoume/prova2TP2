@@ -1,23 +1,23 @@
 #require 'pry'
 
 class System
-  attr_accessor :n, :a, :b1, :b2, :g, :rl, :m0, :m1, :bp, :h, :xn, :yn, :zn
+  attr_reader :n, :a, :b1, :b2, :g, :rl, :fx, :h, :xn, :yn, :zn
   @@all = []
 
   def initialize(n, a, b1, b2, g, rl, fx, h, x0, y0, z0)
-    self.n = n
-    self.a = a
-    self.b1 = b1
-    self.b2 = b2
-    self.g = g
-    self.rl = rl
-    self.h = h
+    @n = n
+    @a = a
+    @b1 = b1
+    @b2 = b2
+    @g = g
+    @rl = rl
+    @h = h
 
-    self.fx = fx # Class that calculates fx
+    @fx = fx # Class that calculates fx
 
-    self.xn = [x0]
-    self.yn = [y0]
-    self.zn = [z0]
+    @xn = [x0]
+    @yn = [y0]
+    @zn = [z0]
 
     complete_calculation
 
