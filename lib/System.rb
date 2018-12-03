@@ -57,21 +57,26 @@ class System
   def calc_y(indx)
     b2_inverted = b2 ** -1
     prev_indx = indx - 2
-    yn[indx] = yn[prev_indx] + h * a * (yn[prev_indx] - xn[prev_indx]) *
+    yn[indx] = yn[prev_indx] + h * a * (xn[prev_indx] - yn[prev_indx] ) *
                   b2_inverted + zn[prev_indx] * b2_inverted  
   end
 
   def calc_z(indx)
     g_inverted = g ** -1
     prev_indx = indx - 2
-    zn[indx] = zn[prev_indx] + h * 
-      (yn[prev_indx] - rl * zn[prev_indx]) * g_inverted 
+    zn[indx] = zn[prev_indx] - h * 
+      (yn[prev_indx] + rl * zn[prev_indx]) * g_inverted 
   end
 
   def complete_calculation
+      for indx in 3..n
+        calc_x(indx)
+        calc_y(indx)
+        calc_z(indx)
+      end 
   end
 
-  def calc_H
+  def calc_Hpart
   end
 
   def plot
