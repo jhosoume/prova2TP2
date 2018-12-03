@@ -1,5 +1,5 @@
 class System
-  attr_reader :n, :a, :b1, :b2, :g, :rl, :m0, :m1, :bp, :h, :xn, :yn, :zn
+  attr_accessor :n, :a, :b1, :b2, :g, :rl, :m0, :m1, :bp, :h, :xn, :yn, :zn
   @@all = []
 
   def initialize(n, a, b1, b2, g, rl, m, bp, h, x0, y0, z0)
@@ -51,3 +51,4 @@ class System
 end
 
 class DependentSystem < System
+end
