@@ -30,6 +30,9 @@ class System
 
   private
   def first_x
+    b1_inverted = b1 ** -1
+    xn[1] = xn[0] + h * a * (yn[0] - xn[0]) * 
+                  b1_inverted - fx.calculate(xn[0]) * b1_inverted 
   end
 
   def first_y
@@ -39,12 +42,25 @@ class System
   end
 
   def calc_x(indx)
+    b1_inverted = b1 ** -1
+    prev_indx = indx - 2
+    xn[indx] = xn[prev_indx] + h * a * (yn[prev_indx] - xn[prev_indx]) * 
+                  b1_inverted - fx.calculate(xn[prev_indx]) * b1_inverted 
   end
 
   def calc_y(indx)
+    b2_inverted = b2 ** -1
+    prev_indx = indx - 2
+    yn[indx] = yn[prev_indx] + h * a * (yn[prev_indx] - xn[prev_indx]) *
+                  b2_inverted + zn[prev_indx] * b2_inverted  
+
   end
 
   def calc_z(indx)
+    g_inverted = g ** -1
+    prev_indx = indx - 2
+    zn[indx] = zn[prev_indx] + h * 
+      (yn[prev_indx] - rl * zn[prev_indx]) * g_inverted 
   end
 
   def complete_calculation
