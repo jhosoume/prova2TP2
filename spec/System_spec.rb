@@ -27,5 +27,17 @@ describe 'System' do
     it "has an Fx class" do
       expect(@sys_one.fx).to be_instance_of(Fx)
     end
+
+    it "calculates x points" do
+      expect(@sys_one.send(:calc_x, 2)).to be_within(0.001).of(0.11914)
+    end
+
+    it "calculates y points" do
+      expect(@sys_one.send(:calc_y, 2)).to be_within(0.001).of(0.10133)
+    end
+
+    it "calculates z points" do
+      expect(@sys_one.send(:calc_z, 2)).to be_within(0.001).of(0.07996)
+    end
   end
 end

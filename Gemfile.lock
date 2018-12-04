@@ -19,10 +19,11 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   nyaplot
   rspec
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
