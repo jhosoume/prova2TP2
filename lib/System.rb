@@ -28,6 +28,19 @@ class System
     @@all
   end
 
+  def plot
+    calc_Hpart
+    plot = Nyaplot::Plot.new
+    sc = plot.add(:line, @hpart, @xn)
+    sc = plot.add(:line, @hpart, @yn)
+    sc = plot.add(:line, @hpart, @zn)
+
+    color = Nyaplot::Colors.qual
+    sc.color(color)
+    plot.export_html("./sys1.html")
+  end
+
+
   private
   def first_x
     b1_inverted = b1 ** -1
@@ -69,26 +82,18 @@ class System
   end
 
   def complete_calculation
-      for indx in 3..n
-        calc_x(indx)
-        calc_y(indx)
-        calc_z(indx)
-      end 
+    first_x
+    first_y
+    first_z
+    for indx in 2..n
+      calc_x(indx)
+      calc_y(indx)
+      calc_z(indx)
+    end 
   end
 
   def calc_Hpart
     @hpart = *((3 * h)..(n * h)).step(2 * h)
-  end
-
-  def plot
-    plot = Nyaplot::Plot.new
-    sc = plot.add(line, @hpart, xn)
-    sc = plot.add(line, @hpart, yn)
-    sc = plot.add(line, @hpart, zn)
-
-    color = Nyaplot::Colors.qual
-    sc.color(color)
-    plot.export_html
   end
 
 end
