@@ -1,3 +1,5 @@
+require 'pry'
+
 class Fx
   attr_reader :m0, :m1, :bp, :m
   def initialize(m0, m1, bp)
@@ -11,3 +13,5 @@ class Fx
      m0 * x_value + 0.5 * m * ((x_value + bp).abs - (x_value - bp).abs)
   end
 end
+
+binding.pry
