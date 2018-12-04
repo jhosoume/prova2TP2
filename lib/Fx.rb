@@ -1,5 +1,3 @@
-require 'pry'
-
 class Fx
   attr_reader :m0, :m1, :bp, :m
   def initialize(m0, m1, bp)
@@ -14,4 +12,3 @@ class Fx
   end
 end
 
-binding.pry
