@@ -28,16 +28,16 @@ class System
     @@all
   end
 
-  def plot
+  def plot(name)
     calc_Hpart
     plot = Nyaplot::Plot.new
     sc = plot.add(:line, @hpart, @xn)
     sc = plot.add(:line, @hpart, @yn)
     sc = plot.add(:line, @hpart, @zn)
-
     color = Nyaplot::Colors.qual
     sc.color(color)
-    plot.export_html("./sys1.html")
+    plot.export_html("./sys" + name + ".html")
+
   end
 
 
@@ -99,6 +99,25 @@ class System
 end
 
 class DependentSystem < System
+  def initialize(n, a, b1, b2, g, rl, fx, h, x0, y0, z0, ref_system)
+    @ref_system = ref_system
+    super(n, a, b1, b2, g, rl, fx, h, x0, y0, z0)
+  end
+
+  def calc_x(indx)
+    xn[indx] = @ref_system.xn[indx]
+  end
+
+  def calc_y(indx)
+    b2_inverted = b2 ** -1
+    prev_indx = indx - 2
+    yn[indx] = @ref_system.yn[indx] + h * (a * (xn[prev_indx] - yn[prev_indx] ) *
+                  b2_inverted + @ref_system.zn[prev_indx] * b2_inverted)  
+  end
+
+  def calc_z(indx)
+    zn[indx] = @ref_system.zn[indx]
+  end
 end
 
 #binding.pry
