@@ -1,5 +1,5 @@
 #require 'pry'
-
+require 'nyaplot'
 class System
   attr_reader :n, :a, :b1, :b2, :g, :rl, :fx, :h, :xn, :yn, :zn
   @@all = []
@@ -32,7 +32,7 @@ class System
   def first_x
     b1_inverted = b1 ** -1
     xn[1] = xn[0] + h * (a * (yn[0] - xn[0]) * 
-                  b1_inverted - fx.calculate(xn[0]) * b1_inverted) 
+                  b1_inverted - @fx.calculate(xn[0]) * b1_inverted) 
   end
 
   def first_y
@@ -81,6 +81,14 @@ class System
   end
 
   def plot
+    plot = Nyaplot::Plot.new
+    sc = plot.add(line, @hpart, xn)
+    sc = plot.add(line, @hpart, yn)
+    sc = plot.add(line, @hpart, zn)
+
+    color = Nyaplot::Colors.qual
+    sc.color(color)
+    plot.export_html
   end
 
 end
